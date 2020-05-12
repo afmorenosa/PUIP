@@ -1,0 +1,78 @@
+#navigation-bar {
+  border-bottom: 1px solid #79827D;
+  height: 30px;
+  position: fixed;
+  top: 0;
+}
+
+#Tabs {
+  height: 100%;
+  width: 1095px;
+}
+
+#seach {
+  height: 100%;
+  width: calc(1366px - 1095px);
+}
+
+#work-space {
+  border-bottom: 2px solid #79827D;
+  height: calc(100vh - 50px);
+  position: absolute;
+  top: 30px;
+}
+
+#status-bar {
+  bottom: 0;
+  height: 20px;
+  padding: 4px;
+  position: fixed;
+}
+
+#task-panel,
+#work-panel
+ {
+  border-right: 2px solid #79827D;
+}
+
+#variables-panel,
+#task-panel {
+   width: 270px;
+}
+
+#variables-panel,
+#task-panel,
+#work-panel {
+  height: 100%;
+}
+
+#work-panel {
+  width: calc(1366px - 270px * 2);
+}
+
+.Tab-active,
+.Tab-inactive {
+  cursor: pointer;
+  height: 100%;
+  text-align: center;
+}
+
+.Tab-active {
+  background: #75B9BE;
+  border-right: 5px solid #59108D;
+  font-weight: 500;
+}
+
+.Tab-inactive {
+  background: #C0E0DF;
+  border-right: 5px solid #79827D;
+}
+
+.Tab-inactive:hover {
+  background: #A8CCC9;
+  border-right: 5px solid #79827D;
+}
+
+.tab-button {
+  width: calc(1095px / 6);
+}

@@ -1,0 +1,27 @@
+{
+  "name": "puip",
+  "version": "1.0.0",
+  "description": "A simple software to administrate inventary and diary activity for little business.",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afmorenosa/PUIP.git"
+  },
+  "keywords": [
+    "business",
+    "inventary",
+    "sales"
+  ],
+  "author": "Andŕes Felipe Moreno Sarria",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/afmorenosa/PUIP/issues"
+  },
+  "homepage": "https://github.com/afmorenosa/PUIP#readme",
+  "devDependencies": {
+    "electron": "^8.2.5"
+  }
+}
