@@ -1,4 +1,22 @@
-html, body {
+/*
+ * PUIP.  Practic Useful Inventary Program.
+ * Copyright (C) 2020  Andŕes Felipe Moreno Sarria
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+ html, body {
   background: #F1FFFA;
   font-family: serif;
   height: 100%;
@@ -28,7 +46,6 @@ a {
   width: 1366px;
 }
 
-
 .container::after,
 .col-threequarter::after,
 .col-fifth::after,
@@ -48,7 +65,6 @@ a {
 .float-right {
   float: right;
 }
-
 
 
 /* Text Alignment */
@@ -100,6 +116,7 @@ a {
 .jumbo {
   font-size: 64px !important;
 }
+
 
 /* Relative Displays */
 
@@ -168,9 +185,32 @@ a {
   -ms-transform: translate(-50%,0%);
 }
 
+
 /* Font Settings*/
 
 p {
   padding: 0;
   margin: 0;
+}
+
+/* Scroll Bars Settings */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #C0E0DF;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #75B9BE;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #A8CCC9;
 }

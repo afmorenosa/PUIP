@@ -1,3 +1,21 @@
+/*
+ * PUIP.  Practic Useful Inventary Program.
+ * Copyright (C) 2020  Andŕes Felipe Moreno Sarria
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 const {ipcRenderer} = require("electron");
 
 var tabs = document.getElementById("Tabs");
@@ -13,8 +31,14 @@ var tabActives = {
   "Proveedores": "Tab-inactive"
 };
 
+/**
+ * This function generate the work spaces tabs in the top of the window.
+ *
+ * @param {array} names [the names of the tabs.]
+ * @param {object} activity [class for active or inactive tabs.]
+ *
+ */
 function fillTabs (names, activity) {
-
   for (var name of names) {
 
     var tabButton = document.createElement("a");
@@ -41,8 +65,19 @@ function fillTabs (names, activity) {
 
 fillTabs(tabNames, tabActives);
 
+/**
+ * This for loop make the active tab and workspace change depending on the tab
+ * clicked.
+ */
 for (tab of tabs.children) {
 
+  /**
+   * This function add an event to tabs, whenever a tab is clicked, this tab is
+   * activated, the remaining tabs are desactivated and the workspace is change
+   * acoording to the tabs clicked.
+   *
+   * @param {event} event [object clicked]
+   */
   tab.addEventListener("click", function (event) {
 
     var tabSelected = event.target;

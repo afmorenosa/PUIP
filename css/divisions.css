@@ -1,3 +1,25 @@
+/*
+ * PUIP.  Practic Useful Inventary Program.
+ * Copyright (C) 2020  Andŕes Felipe Moreno Sarria
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Sections formating.
+ */
+
 #navigation-bar {
   border-bottom: 1px solid #79827D;
   height: 30px;
@@ -44,11 +66,16 @@
 #task-panel,
 #work-panel {
   height: 100%;
+  overflow: scroll;
 }
 
 #work-panel {
   width: calc(1366px - 270px * 2);
 }
+
+/**
+ * Tabs colors and format.
+ */
 
 .Tab-active,
 .Tab-inactive {
@@ -75,4 +102,24 @@
 
 .tab-button {
   width: calc(1095px / 6);
+}
+
+/*
+ * Work place content format */
+
+.task-panel-section {
+  width: calc(270px - 12px);
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.task-add-items {
+  height: 40px;
+}
+
+.add-button {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }

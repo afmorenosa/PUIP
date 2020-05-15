@@ -1,3 +1,21 @@
+/*
+ * PUIP.  Practic Useful Inventary Program.
+ * Copyright (C) 2020  Andŕes Felipe Moreno Sarria
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 const electron = require('electron');
 const path = require("path");
 const url = require("url");
@@ -52,10 +70,4 @@ function createWindow () {
 
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser mainWindows.
-// Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
