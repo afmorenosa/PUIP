@@ -27,6 +27,13 @@
   top: 0;
 }
 
+#tool-bar {
+  border-bottom: 1px solid #79827D;
+  height: 30px;
+  position: fixed;
+  top: 30px;
+}
+
 #Tabs {
   height: 100%;
   width: 1095px;
@@ -34,14 +41,14 @@
 
 #seach {
   height: 100%;
-  width: calc(1366px - 1095px);
+  width: calc(100vw - 1095px);
 }
 
 #work-space {
-  border-bottom: 2px solid #79827D;
-  height: calc(100vh - 50px);
+  border-bottom: 1px solid #79827D;
+  height: calc(100vh - 80px);
   position: absolute;
-  top: 30px;
+  top: 60px;
 }
 
 #status-bar {
@@ -51,26 +58,37 @@
   position: fixed;
 }
 
-#task-panel,
-#work-panel
- {
-  border-right: 2px solid #79827D;
-}
-
 #variables-panel,
 #task-panel {
    width: 270px;
+   z-index: 1;
 }
 
 #variables-panel,
 #task-panel,
 #work-panel {
-  height: 100%;
+  height: calc(100vh - 80px);
   overflow: scroll;
+  top: 30;
+  position: fixed;
 }
 
 #work-panel {
-  width: calc(1366px - 270px * 2);
+  width: calc(100vw - 2 * 270px);
+  min-width: 50px;
+  margin: 0 270px;
+  left: 0;
+  z-index: 0;
+  border-right: 1px solid #79827D;
+  border-left: 1px solid #79827D;
+}
+
+#task-panel {
+  left: 0;
+}
+
+#variables-panel {
+  right: 0;
 }
 
 /**
@@ -79,7 +97,6 @@
 
 .Tab-active,
 .Tab-inactive {
-  cursor: pointer;
   height: 100%;
   text-align: center;
 }
@@ -118,8 +135,14 @@
   height: 40px;
 }
 
-.add-button {
-  width: 20px;
-  height: 20px;
+.tool-bar-button {
+  background: #497A7E;
+  width: 24px;
+  height: 24px;
+  margin: 3px 0 3px 5px;
+  border-radius: 7px;
+}
+
+.pointer {
   cursor: pointer;
 }

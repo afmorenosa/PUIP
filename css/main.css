@@ -43,7 +43,7 @@ a {
 }*/
 
 .full-width {
-  width: 1366px;
+  width: 100vw;
 }
 
 .container::after,

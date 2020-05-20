@@ -26,6 +26,7 @@
 
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/divisions.css">
+  <link rel="stylesheet" href="css/Proveedores.css">
 </head>
 <body>
 
@@ -42,14 +43,38 @@
 
   </div>
 
-  <div id="work-space" class="container full-width  Inventario">
+
+  <div id="tool-bar" class="container full-width">
+
+    <img id="new-provider" src="../assets/add.svg"
+    class="float-left tool-bar-button pointer">
+
+  </div>
+
+  <div id="work-space" class="container full-width Inventario">
 
     <div id="task-panel" class="container float-left">
-asd
+
+      <!-- Providers categories -->
+
+      <div id="categories" class="task-panel-section">
+
+        <span>Categorías</span>
+
+      </div>
+
+      <div class="task-add-items display-container">
+
+
+
+      </div>
+
     </div>
 
     <div id="work-panel" class="container float-left">
-sdf
+
+      <table id="provider-table"></table>
+
     </div>
 
     <div id="variables-panel" class="container float-left">
@@ -63,6 +88,9 @@ dfg
     Idle
   </div>
 
+  <script src="../js/Tabs.js"></script>
   <script src="js/Proveedores.js"></script>
+
+  </script>
 </body>
 </html>

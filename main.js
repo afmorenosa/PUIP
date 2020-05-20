@@ -16,21 +16,48 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const electron = require('electron');
+const electron = require("electron");
+const {app, BrowserWindow, ipcMain} = electron;
+const sqlite = require("sqlite3");
 const path = require("path");
 const url = require("url");
+const fs = require('fs');
 
-const {app, BrowserWindow, ipcMain} = electron;
+
+app.allowRendererProcessReuse = false;
+var dataBase = new sqlite.Database(path.join(__dirname, "sql/database.db"), function (err) {
+  if (err) {
+    return console.error(err.message);
+  } else {
+    console.log("Connected to database");
+  }
+});
+
+dataBase.run("PRAGMA foreign_keys=ON;");
+
+var sqlNames = ["Inventario", "Ventas", "Compras", "Stats", "Proveedores"];
+
+for (var sqlName of sqlNames){
+  dataBase.run(fs.readFileSync(path.join(__dirname, "sql/" + sqlName + ".sql"))
+  .toString(), function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+}
+
 
 var mainWin;
 var processor;
-var addInventaryCategory;
+var newProvider;
 
 function createWindow () {
   // Create the browser mainWindow.
   mainWin = new BrowserWindow({
-    width: 700,
-    height: 800,
+    width: 600,
+    minWidth: 600,
+    height: 600,
+    minHeight: 600,
     webPreferences: {
       nodeIntegration: true
     }
@@ -71,3 +98,80 @@ function createWindow () {
 }
 
 app.on("ready", createWindow);
+
+/**
+ * Buttons actions
+ */
+
+/**
+ * Tabs
+ */
+
+ipcMain.on("loadTab", function (event, value) {
+
+  dataBase.all("SELECT * FROM "+ value.name +";",
+  function (err, table) {
+    if (err) {
+      return console.error(err.message);
+    }
+    mainWin.send("updateTable", table);
+  });
+
+});
+
+/**
+ *Prooveedores
+ */
+
+var newProvider;
+
+/**
+ * Open a new window for add a new provider
+ */
+ipcMain.on("new-provider", function (event, value) {
+
+  newProvider = new BrowserWindow({
+    maxWidth: 600,
+    minWidth: 600,
+    maxHeight: 300,
+    minHeight: 300,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+
+  newProvider.loadURL(url.format({
+    pathname: path.join(__dirname,"html/forms/newProvider.html"),
+    protocol: "file:",
+    slashes: true
+  }));
+
+})
+
+/**
+ * Update the database and send an event for update the provider table.
+ */
+ipcMain.on("newProviderCreated", function (event, value) {
+
+
+  dataBase.run("INSERT INTO Proveedores (Nombre, Telefono, Direccion, Identificacion, Tags) VALUES ("
+  .concat(value) + ");",
+  function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+  });
+
+  newProvider.close();
+  newProvider = null;
+
+  dataBase.all("SELECT * FROM Proveedores;",
+  function (err, table) {
+    if (err) {
+      return console.error(err.message);
+    }
+    mainWin.send("updateTable", table);
+  });
+
+
+})

@@ -19,9 +19,8 @@
 const {ipcRenderer} = require("electron");
 
 var tabs = document.getElementById("Tabs");
+var providerTable = document.getElementById("provider-table");
 var tab;
-
-var tabNames = ["Inventario", "Ventas", "Compras", "Historial", "Proveedores"];
 
 var tabActives = {
   "Inventario": "Tab-inactive",
@@ -31,86 +30,68 @@ var tabActives = {
   "Proveedores": "Tab-active"
 };
 
-/**
- * This function generate the work spaces tabs in the top of the window.
- *
- * @param {array} names [the names of the tabs.]
- * @param {object} activity [class for active or inactive tabs.]
- *
- */
-function fillTabs (names, activity) {
-
-  for (var name of names) {
-
-    var tabButton = document.createElement("a");
-    tabButton.setAttribute("href", name+".html");
-
-    var tabDiv = document.createElement("div");
-    tabDiv.id = name;
-    tabDiv.classList.add(activity[name]);
-    tabDiv.classList.add("tab-button");
-    tabDiv.classList.add("float-left");
-    tabDiv.classList.add("display-container");
-
-    var tabP = document.createElement("p");
-    tabP.classList.add("display-middle");
-    tabP.innerHTML = name;
-
-
-    tabDiv.appendChild(tabP);
-    tabButton.appendChild(tabDiv);
-    tabs.appendChild(tabButton);
-
-  }
-}
-
 fillTabs(tabNames, tabActives);
 
 /**
- * This for loop make the active tab and workspace change depending on the tab
- * clicked.
+ * Open a form window for adding a new provider when click in add a new icon
  */
-for (tab of tabs.children) {
+document.getElementById("new-provider").addEventListener("click",
+ function (event) {
+   ipcRenderer.send("new-provider", null);
+ });
 
-  /**
-   * This function add an event to tabs, whenever a tab is clicked, this tab is
-   * activated, the remaining tabs are desactivated and the workspace is change
-   * acoording to the tabs clicked.
-   *
-   * @param {event} event [object clicked]
-   */
-  tab.addEventListener("click", function (event) {
+/**
+ * Update provider table
+ */
+ipcRenderer.on("updateTable", function (event, value) {
+  providerTable.innerHTML = "<tr>"+
+    "<th>id</th>"+
+    "<th>Nombre</th>"+
+    "<th>Telefono</th>"+
+    "<th></th>"+
+    "</tr>";
 
-    var tabSelected = event.target;
+  var entries;
+  var counter=0;
 
-    if(tabSelected.classList.contains("display-middle")){
+  for (entries of value) {
+    counter += 1;
+    var providerEntry = document.createElement("tr");
 
-      tabSelected = tabSelected.parentElement;
+    var providerID = document.createElement("td");
+    providerID.id = entries.id;
+    providerID.classList.add("provider-id");
+    providerID.classList.add("pointer");
+    providerID.innerHTML = counter;
 
-    }
+    var providerName = document.createElement("td");
+    providerName.classList.add("provider-name");
+    providerName.classList.add("pointer");
+    providerName.innerHTML = entries.Nombre;
 
-    var allTabs = document.getElementById("Tabs");
+    var providerTelephone = document.createElement("td");
+    providerTelephone.classList.add("provider-telephone");
+    providerTelephone.classList.add("pointer");
+    providerTelephone.innerHTML = entries.Telefono;
 
-    if(tabSelected.classList.contains("Tab-inactive")){
+    var providerEliminate = document.createElement("td");
+    providerEliminate.classList.add("provider-remove");
+    providerEliminate.innerHTML = "<img src=\"../assets/remove.svg\""+
+     " class=\"provider-remove-button pointer\"/>";
 
-      for (var activable of allTabs.children) {
 
-        if(activable.id == tabSelectedName){
+    providerEntry.appendChild(providerID);
+    providerEntry.appendChild(providerName);
+    providerEntry.appendChild(providerTelephone);
+    providerEntry.appendChild(providerEliminate);
+    providerTable.appendChild(providerEntry);
+  }
 
-          activable.classList.remove("Tab-inactive");
-          activable.classList.add("Tab-active");
+});
 
-        } else {
-
-          activable.classList.add("Tab-inactive");
-          activable.classList.remove("Tab-active");
-
-        }
-
-      }
-
-    }
-
+window.addEventListener("load", function (event) {
+  console.log("Loaded");
+  ipcRenderer.send("loadTab", {
+    name: "Proveedores"
   });
-
-}
+});

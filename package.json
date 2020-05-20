@@ -4,7 +4,8 @@
   "description": "A simple software to administrate inventary and diary activity for little business.",
   "main": "main.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron .",
+    "postinstall": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,10 @@
   },
   "homepage": "https://github.com/afmorenosa/PUIP#readme",
   "devDependencies": {
+    "electron-rebuild": "^1.11.0",
     "electron": "^8.2.5"
+  },
+  "dependencies": {
+    "sqlite3": "^4.2.0"
   }
 }
