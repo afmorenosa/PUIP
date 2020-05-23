@@ -23,7 +23,6 @@ const path = require("path");
 const url = require("url");
 const fs = require('fs');
 
-
 app.allowRendererProcessReuse = false;
 var dataBase = new sqlite.Database(path.join(__dirname, "sql/database.db"), function (err) {
   if (err) {
@@ -153,7 +152,6 @@ ipcMain.on("new-provider", function (event, value) {
  */
 ipcMain.on("newProviderCreated", function (event, value) {
 
-
   dataBase.run("INSERT INTO Proveedores (Nombre, Telefono, Direccion, Identificacion, Tags) VALUES ("
   .concat(value) + ");",
   function (err) {
@@ -164,6 +162,29 @@ ipcMain.on("newProviderCreated", function (event, value) {
 
   newProvider.close();
   newProvider = null;
+
+  dataBase.all("SELECT * FROM Proveedores;",
+  function (err, table) {
+    if (err) {
+      return console.error(err.message);
+    }
+    mainWin.send("updateTable", table);
+  });
+
+})
+
+
+/**
+ * Update the database and send an event for update the provider table.
+ */
+ipcMain.on("providerRemoved", function (event, value) {
+
+  dataBase.run("DELETE FROM Proveedores WHERE id=" + value + ";",
+  function (err) {
+    if (err) {
+      return console.error(err.message);
+    }
+  });
 
   dataBase.all("SELECT * FROM Proveedores;",
   function (err, table) {

@@ -87,6 +87,8 @@ ipcRenderer.on("updateTable", function (event, value) {
     providerTable.appendChild(providerEntry);
   }
 
+  activeRemoveButtons()
+
 });
 
 window.addEventListener("load", function (event) {
@@ -95,3 +97,16 @@ window.addEventListener("load", function (event) {
     name: "Proveedores"
   });
 });
+
+function activeRemoveButtons() {
+  var removeButtons = document.getElementsByClassName("provider-remove-button");
+  var removeButton;
+
+  for (removeButton of removeButtons) {
+    removeButton.addEventListener("click", function (event) {
+      var removedId = event.target.parentElement.parentElement.children[0].id;
+      ipcRenderer.send("providerRemoved", removedId);
+   });
+  }
+
+}
