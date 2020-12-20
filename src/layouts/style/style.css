@@ -1,0 +1,21 @@
+/**
+ * This class will be draggable.
+ */
+.frame-titlebar {
+    -webkit-app-region: drag;
+}
+
+/**
+ * But all its children will not.
+ */
+.frame-titlebar * {
+    -webkit-app-region: no-drag;
+}
+
+/**
+ * As we want some parts, but not all the window to be scrollable,
+ * deactivate the scroll too the body.
+ */
+body {
+    overflow: hidden;
+}
