@@ -1,4 +1,0 @@
-CREATE TABLE IF NOT EXISTS Stats(
-  id INTEGER PRIMARY KEY,
-  Categoria DATE
-);

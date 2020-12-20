@@ -1,11 +1,15 @@
 {
   "name": "puip",
-  "version": "1.0.0",
+  "productName": "puip-test",
+  "version": "0.1.0",
   "description": "A simple software to administrate inventary and diary activity for little business.",
   "main": "main.js",
   "scripts": {
-    "test": "electron .",
-    "postinstall": "electron-builder install-app-deps"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
   "repository": {
     "type": "git",
@@ -22,11 +26,48 @@
     "url": "https://github.com/afmorenosa/PUIP/issues"
   },
   "homepage": "https://github.com/afmorenosa/PUIP#readme",
-  "devDependencies": {
-    "electron-rebuild": "^1.11.0",
-    "electron": "^8.2.5"
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "puip_test"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   },
   "dependencies": {
-    "sqlite3": "^4.2.0"
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "admin-lte": "^3.1.0-rc",
+    "bootstrap": "^4.5.3",
+    "electron-squirrel-startup": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "11.1.0"
   }
 }
