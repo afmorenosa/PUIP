@@ -20,7 +20,7 @@
  * This is the entry point for the app, and the main process.
  */
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require("path");
 const url = require("url");
 

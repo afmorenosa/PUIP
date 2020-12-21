@@ -22,6 +22,7 @@
  */
 
 const { app } = require("electron").remote;
+const jQuery = require("jquery");
 const path = require("path");
 const url = require("url");
 const $ = require("jquery");

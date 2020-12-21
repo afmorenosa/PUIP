@@ -1,4 +1,20 @@
 <!doctype html>
+
+<!--
+    PUIP.  Practic Useful Inventary Program.
+    Copyright (C) 2020  Andŕes Felipe Moreno Sarria
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
 <html>
   <head>
     <meta charset="UTF-8"/>
@@ -38,18 +54,18 @@
         <ul class="navbar-nav ml-auto">
           <!-- Frame Manage Tools -->
           <li class="nav-item">
-            <a class="nav-link" role="button">
-              <i class="fas fa-window-minimize"></i>
+            <a id="frame-iconize" class="nav-link" role="button">
+              <i class="align-middle far fa-window-minimize"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" role="button">
-              <i class="fas fa-window-maximize"></i>
+            <a id="frame-maximize" class="nav-link" role="button">
+              <i class="align-middle far fa-window-restore"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" role="button">
-              <i class="fas fa-times"></i>
+            <a id="frame-close" class="nav-link" role="button">
+              <i class="align-middle far fa-window-close"></i>
             </a>
           </li>
         </ul>
@@ -87,7 +103,7 @@
 
               <!-- Home link -->
               <li class="nav-item">
-                <a class="nav-link active">
+                <a class="nav-link active" href="#">
                   <i class="nav-icon fas fa-home"></i>
                   <p>Home</p>
                 </a>
@@ -127,5 +143,6 @@
 
     <!-- Styling script -->
     <script src="../style/style.js"></script>
+    <script src="admin.js"></script>
   </body>
 </html>
