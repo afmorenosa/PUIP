@@ -23,6 +23,8 @@
 
 const { ipcRenderer, remote } = require("electron");
 
+// Frame buttons handlers
+
 $("#frame-close").click(() => {
     remote.getCurrentWindow().close();
 });
@@ -45,4 +47,30 @@ $("#frame-maximize").click(() => {
 
 $("#frame-iconize").click(() => {
     remote.getCurrentWindow().minimize();
+});
+
+
+
+// Page request
+
+$(".sidebar .nav-link").click((event) => {
+    $(".sidebar *").removeClass("active");
+
+    let item = $(event.currentTarget);
+
+    item.blur();
+
+    item.addClass("active");
+
+    item.parent().parents(".menu-open").children(".nav-link").addClass("active");
+
+    if (item.attr("href") != "#") {
+        ipcRenderer.send("load-new-page", item.attr("href"));
+    }
+});
+
+ipcRenderer.on("page-html", (event, arg) => {
+    // On Windows need replace backslashes with slashes
+    arg = arg.replace(/\\/g, "/");
+    $("#content").load(encodeURI(arg));
 });

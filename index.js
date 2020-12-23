@@ -20,12 +20,17 @@
  * This is the entry point for the app, and the main process.
  */
 
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain } = require("electron");
+const routes = require("./src/routes/routes.js");
 const path = require("path");
 const url = require("url");
 
 /// This object should store the Main Window
 let mainWindow = null;
+
+
+
+// Init the app
 
 function createWindow () {
     mainWindow = new BrowserWindow({
@@ -62,4 +67,11 @@ app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
+});
+
+
+
+/// Handler of page load
+ipcMain.on("load-new-page", (event, arg) => {
+    event.reply("page-html", routes.loadPage(arg));
 });

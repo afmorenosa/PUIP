@@ -16,36 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/** @file style.js
- * This file include in the html file in which is included all the CSS
- * links to work properly.
+/** @file routes.js
+ * This file contains and handle the loads of js.
  */
 
-const { app } = require("electron").remote;
-const jQuery = require("jquery");
 const path = require("path");
 const url = require("url");
-const $ = require("jquery");
 
-require("bootstrap");
-require("admin-lte");
-
-function addCssFile(route) {
-    let link = $("<link />",{
-        rel: "stylesheet",
-        type: "text/css",
-        href: url.format({
-            pathname: path.join(app.getAppPath(),
-                                route),
+module.exports = {
+    getHtml: function (page) {
+        return url.format({
+            pathname: path.join(__dirname, "/products.html"),
             protocol: "file:",
             slashes: true
-        })
-    });
-
-    $("head").append(link);
-}
-
-addCssFile("/node_modules/bootstrap/dist/css/bootstrap.min.css");
-addCssFile("/node_modules/admin-lte/dist/css/adminlte.min.css");
-addCssFile("/node_modules/@fortawesome/fontawesome-free/css/all.min.css");
-addCssFile("/src/layouts/style/style.css");
+        });
+    }
+};
