@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="card-text">Here goes all the display and location information</p>
+            <p class="card-text">Here goes all the display information</p>
             <div class="form-group">
               <label for="product-image">Product Image</label>
               <input id="product-image" type="file" class="file"
@@ -79,6 +79,7 @@
             </div>
           </div>
         </div>
+        <!-- /.card -->
       </div>
       <!-- /.col -->
 
@@ -93,14 +94,14 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="card-text">Here goes the price and costs of the products.</p>
+            <p class="card-text">Here goes the price and costs of the product.</p>
             <div class="form-group">
               <label for="product-cost">Product Cost</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
                 </div>
-                <input id="product-cost" class="form-control" type="number">
+                <input id="product-cost" class="form-control" type="number" min="0">
               </div>
               <small class="form-text text-muted">
                 Here goes the price at which the product is purchased from the distributor.
@@ -112,7 +113,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
                 </div>
-                <input id="product-price" class="form-control" type="number">
+                <input id="product-price" class="form-control" type="number" min="0">
               </div>
               <small class="form-text text-muted">
                 Here goes the price at which you plan to sell the product.
@@ -121,13 +122,44 @@
             <div class="form-group">
               <label for="product-tax">Product Tax</label>
               <div class="input-group">
-                <input id="product-tax" class="form-control" type="number">
+                <input id="product-tax" class="form-control" type="number" min="0">
                 <div class="input-group-append">
                   <span class="input-group-text">%</span>
                 </div>
               </div>
               <small class="form-text text-muted">
                 Here goes the product product tax percentage.
+              </small>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Storing Information</h3>
+            <div class="card-tools">
+              <button class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Here goes all the storing information</p>
+            <div class="form-group">
+              <label for="product-quantity">Product Initial Inventory</label>
+              <input id="product-quantity" class="form-control" type="number" min="0">
+              <small class="form-text text-muted">
+                Here goes the initial or actuall quantity of product that you own.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="product-storing-detail">Product Location Details</label>
+              <textarea id="product-storing-detail"
+                        class="form-control" rows="4"></textarea>
+              <small class="form-text text-muted">
+                Here goes the storing location of the product, in case that needed. <br/>
+                E.G. First shelf, third section.
               </small>
             </div>
           </div>

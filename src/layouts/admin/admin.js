@@ -83,7 +83,7 @@ ipcRenderer.on("page-html", (event, arg) => {
         /// Add cute scrollbars to body
         $("body").overlayScrollbars({
             scrollbars: {
-                autoHide: "leave"
+                autoHide: "move"
             }
         });
     });
