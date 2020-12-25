@@ -27,8 +27,13 @@ const path = require("path");
 const url = require("url");
 const $ = require("jquery");
 
+window.jQuery = require("jquery");
+
 require("bootstrap");
 require("admin-lte");
+require("bootstrap-fileinput");
+require("bootstrap-fileinput/themes/fa/theme.min.js");
+require("overlayscrollbars/js/jquery.overlayScrollbars.js");
 
 function addCssFile(route) {
     let link = $("<link />",{
@@ -46,6 +51,8 @@ function addCssFile(route) {
 }
 
 addCssFile("/node_modules/bootstrap/dist/css/bootstrap.min.css");
+addCssFile("/node_modules/bootstrap-fileinput/css/fileinput.min.css");
 addCssFile("/node_modules/admin-lte/dist/css/adminlte.min.css");
+addCssFile("/node_modules/overlayscrollbars/css/overlayScrollbars.min.css");
 addCssFile("/node_modules/@fortawesome/fontawesome-free/css/all.min.css");
 addCssFile("/src/layouts/style/style.css");

@@ -30,7 +30,7 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-6">
+      <div class="col-md-6">
         <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">General Information</h3>
@@ -46,11 +46,108 @@
               <label for="product-name">Product Name</label>
               <input id="product-name" class="form-control" type="text">
             </div>
+            <div class="form-group">
+              <label for="product-detail">Product Detail</label>
+              <textarea id="product-detail" class="form-control" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="product-code">Product Code</label>
+              <input id="product-code" class="form-control" type="text">
+              <small class="form-text text-muted">
+                It's highly encouraged to use the barcode of the product.
+              </small>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <div class="card card-warning">
+          <div class="card-header">
+            <h3 class="card-title">Display Information</h3>
+            <div class="card-tools">
+              <button class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Here goes all the display and location information</p>
+            <div class="form-group">
+              <label for="product-image">Product Image</label>
+              <input id="product-image" type="file" class="file"
+                     data-preview-file-type="image">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+
+      <div class="col-md-6">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Financial Information</h3>
+            <div class="card-tools">
+              <button class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Here goes the price and costs of the products.</p>
+            <div class="form-group">
+              <label for="product-cost">Product Cost</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input id="product-cost" class="form-control" type="number">
+              </div>
+              <small class="form-text text-muted">
+                Here goes the price at which the product is purchased from the distributor.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="product-price">Product Price</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input id="product-price" class="form-control" type="number">
+              </div>
+              <small class="form-text text-muted">
+                Here goes the price at which you plan to sell the product.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="product-tax">Product Tax</label>
+              <div class="input-group">
+                <input id="product-tax" class="form-control" type="number">
+                <div class="input-group-append">
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+              <small class="form-text text-muted">
+                Here goes the product product tax percentage.
+              </small>
+            </div>
           </div>
         </div>
         <!-- /.card -->
       </div>
       <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row mb-3">
+        <div class="col-12">
+          <button type="button" class="btn btn-danger">
+            Cancel
+          </button>
+          <button type="button" class="btn btn-success float-right">
+            Create New Product
+          </button>
+        </div>
+        <!-- /.col -->
     </div>
     <!-- /.row -->
   </div>

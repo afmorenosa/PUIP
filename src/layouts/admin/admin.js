@@ -54,15 +54,18 @@ $("#frame-iconize").click(() => {
 // Page request
 
 $(".sidebar .nav-link").click((event) => {
-    $(".sidebar *").removeClass("active");
-
     let item = $(event.currentTarget);
 
     item.blur();
 
-    item.addClass("active");
+    if(item.siblings(".nav-treeview").length == 0) {
+        $(".sidebar *").removeClass("active");
 
-    item.parent().parents(".menu-open").children(".nav-link").addClass("active");
+        item.addClass("active");
+
+        item.parent().parents(".menu-open").children(".nav-link").addClass("active");
+    }
+
 
     if (item.attr("href") != "#") {
         ipcRenderer.send("load-new-page", item.attr("href"));
@@ -72,5 +75,16 @@ $(".sidebar .nav-link").click((event) => {
 ipcRenderer.on("page-html", (event, arg) => {
     // On Windows need replace backslashes with slashes
     arg = arg.replace(/\\/g, "/");
-    $("#content").load(encodeURI(arg));
+    $("#content").load(encodeURI(arg), () => {
+        $(".file").fileinput({
+            theme: "fa"
+        });
+
+        /// Add cute scrollbars to body
+        $("body").overlayScrollbars({
+            scrollbars: {
+                autoHide: "leave"
+            }
+        });
+    });
 });
