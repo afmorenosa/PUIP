@@ -1,19 +1,19 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
-  "version": "2.0.1",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "PUIP",
+  "productName": "puip",
+  "version": "0.1.0",
+  "description": "A simple software to administrate inventary and diary activity for little business.",
   "main": "./main.prod.js",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://github.com/electron-react-boilerplate"
+    "name": "Andŕes Felipe Moreno Sarria",
+    "email": "afmorenosa@unal.edu.co",
+    "url": "https://github.com/afmorenosa/PUIP"
   },
   "scripts": {
     "electron-rebuild": "node -r ../.erb/scripts/BabelRegister.js ../.erb/scripts/ElectronRebuild.js",
     "postinstall": "yarn electron-rebuild"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "admin-lte": "^3.1.0-rc",
     "sqlite3": "^5.0.0"
