@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { remote } from "electron";
+import $ from "jquery";
+
+const window = remote.getCurrentWindow();
 
 class Header extends Component {
   render() {
@@ -30,23 +34,59 @@ class Header extends Component {
         {/* Right Frame Links */}
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <a id="frame-iconize" className="nav-link" role="button">
+            <a
+              id="frame-iconize"
+              className="nav-link"
+              role="button"
+              onClick={this.handleIconizeButtonClick}>
               <i className="align-middle far fa-window-minimize"></i>
             </a>
           </li>
           <li className="nav-item">
-            <a id="frame-maximize" className="nav-link" role="button">
+            <a
+              id="frame-maximize"
+              className="nav-link"
+              role="button"
+              onClick={this.handleMaximizeButtonClick}>
               <i className="align-middle far fa-window-restore"></i>
             </a>
           </li>
           <li className="nav-item">
-            <a id="frame-close" className="nav-link" role="button">
+            <a
+              id="frame-close"
+              className="nav-link"
+              role="button"
+              onClick={this.handleCloseButtonClick}>
               <i className="align-middle far fa-window-close"></i>
             </a>
           </li>
         </ul>
       </nav>
     );
+  }
+
+  handleCloseButtonClick() {
+    window.close();
+  }
+
+  handleMaximizeButtonClick() {
+    if (window.isMaximized()) {
+      window.unmaximize();
+      $("#frame-maximize")
+        .find($(".fa-window-restore"))
+        .removeClass("fa-window-restore")
+        .addClass("fa-window-maximize");
+    } else {
+      window.maximize();
+      $("#frame-maximize")
+        .find($(".fa-window-maximize"))
+        .removeClass("fa-window-maximize")
+        .addClass("fa-window-restore");
+    }
+  }
+
+  handleIconizeButtonClick() {
+    window.minimize();
   }
 }
 
