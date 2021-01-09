@@ -8,7 +8,7 @@ class MainSidebar extends Component {
     super(props);
 
     this.state = {
-      loadedPage: 1
+      loadedPage: "/"
     };
 
     this.handleChangePage = this.handleChangePage.bind(this);
@@ -26,7 +26,18 @@ class MainSidebar extends Component {
     });
   }
 
-  handleChangePage() {
+  handleChangePage(event) {
+    let item = $(event.currentTarget);
+    this.setState(
+      {
+        loadedPage: event.currentTarget.href.split("#")[1]
+      },
+      () => {
+        $(".sidebar *").removeClass("active");
+        item.addClass("active");
+        item.parent().parents(".menu-open").children(".nav-link").addClass("active");
+      }
+    );
   }
 
   renderLinkList() {
@@ -40,7 +51,10 @@ class MainSidebar extends Component {
         link = (
           <li className="nav-item" key={fullRoute}>
             <Link
-              className="nav-link"
+              className={
+                "nav-link" +
+                  (sidebar.state.loadedPage == fullRoute ? " active" : "")
+              }
               to={fullRoute}
               onClick={sidebar.handleChangePage}
               replace>
