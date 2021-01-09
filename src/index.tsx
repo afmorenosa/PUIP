@@ -6,5 +6,8 @@ import "bootstrap";
 import "admin-lte";
 import "admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars";
 import $ from "jquery";
+window.jQuery = window.$ = $;
+import "bootstrap-fileinput";
+require("bootstrap-fileinput/themes/fas/theme");
 
 render(<App />, $(".wrapper")[0]);

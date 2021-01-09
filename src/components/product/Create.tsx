@@ -1,45 +1,57 @@
 import React, { Component } from "react";
+import { Row, Col, Card, Form } from "react-bootstrap";
 import ContentWrapper from "../common/ContentWrapper";
-import Row from "../common/Row";
-import Card from "../common/Card";
+import $ from "jquery";
 
 class ProductCreate extends Component {
+  componentDidMount() {
+    $(".form-control-file").fileinput({
+      language: "en",
+      theme: "fas"
+    });
+  }
+
   render() {
     return (
       <ContentWrapper title="New Product">
         <Row>
-          <div className="col-lg-6">
-            <Card
-              title="General Information"
-              color="primary">
-              <p className="card-text">Here goes all the basic product information.</p>
-              <div className="form-group">
-                <label>Product Name</label>
-                <input id="product-name" className="form-control" type="text" />
-              </div>
-              <div className="form-group">
-                <label>Product Detail</label>
-                <textarea id="product-detail" className="form-control" rows="4"></textarea>
-              </div>
-              <div className="form-group">
-                <label>Product Code</label>
-                <input id="product-code" className="form-control" type="text" />
-                <small className="form-text text-muted">
-                  It's highly encouraged to use the barcode of the product.
-                </small>
-              </div>
+          <Col lg="6">
+            <Card className="card-primary">
+              <Card.Header>
+                <Card.Title as="h3">General Information</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                <Card.Text>Here goes all the basic product information.</Card.Text>
+                <Form.Group controlId="product-name">
+                  <Form.Label>Product Name</Form.Label>
+                  <Form.Control type="text"/>
+                </Form.Group>
+                <Form.Group controlId="product-detail">
+                  <Form.Label>Product Detail</Form.Label>
+                  <Form.Control as="textarea" rows="4" />
+                </Form.Group>
+                <Form.Group controlId="product-code">
+                  <Form.Label>Product Code</Form.Label>
+                  <Form.Control type="text" />
+                  <Form.Text className="text-muted">
+                    It's highly encouraged to use the barcode of the product.
+                  </Form.Text>
+                </Form.Group>
+              </Card.Body>
             </Card>
-            <Card
-              title="Display Information"
-              color="warning">
-              <p className="card-text">Here goes all the display information</p>
-              <div className="form-group">
-                <label>Product Image</label>
-                <input id="product-image" type="file" className="file"
-                       data-preview-file-type="image"/>
-              </div>
+            <Card className="card-warning">
+              <Card.Header>
+                <Card.Title as="h3">Display Information</Card.Title>
+              </Card.Header>
+              <Card.Body>
+                <Card.Text>Here goes all the display information</Card.Text>
+                <Form.Group controlId="product-image">
+                  <Form.Label>Product Image</Form.Label>
+                  <Form.File.Input data-preview-file-type="image" />
+                </Form.Group>
+              </Card.Body>
             </Card>
-          </div>
+          </Col>
         </Row>
       </ContentWrapper>
     );

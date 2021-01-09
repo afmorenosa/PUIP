@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { Container } from "react-bootstrap";
 
 class Content extends Component {
   render() {
     return (
       <div className="content">
-        <div className="container-fluid">
+        <Container fluid>
           {this.props.children}
-        </div>
+        </Container>
       </div>
     );
   }
