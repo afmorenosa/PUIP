@@ -38,14 +38,6 @@ class App extends Component {
     return Routes.map((route) => { return getList(route, ""); });
   }
 
-  componentDidMount() {
-    $(document.body).overlayScrollbars({
-      scrollbars: {
-        autoHide: "move"
-      }
-    });
-  }
-
   render() {
     return (
       <>

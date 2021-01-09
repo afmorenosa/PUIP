@@ -248,6 +248,7 @@
     "electron-updater": "^4.3.4",
     "history": "^5.0.0",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.5",
@@ -272,7 +273,7 @@
         }
       }
     ],
-    "singleQuote": true
+    "singleQuote": false
   },
   "renovate": {
     "extends": [

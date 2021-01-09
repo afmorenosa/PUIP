@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
 class ContentHeader extends Component {
   render() {
     return (
       <div className="content-header">
-        <div className="container-fluid">
-          <div className="row mb-2">
-            <div className="col">
-              <h1 className="m-0">{this.props.title}</h1>
-            </div>
-          </div>
-        </div>
+        <Container fluid>
+          <Row mb="2">
+            <Col className="col">
+              <h1 className="m-0">{this.props.children}</h1>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

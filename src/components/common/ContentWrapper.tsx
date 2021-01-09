@@ -3,10 +3,21 @@ import ContentHeader from "./ContentHeader";
 import Content from "./Content";
 
 class ContentWrapper extends Component {
+  componentDidMount() {
+    $(".content-wrapper").overlayScrollbars({
+      sizeAutoCapable : true,
+      paddingAbsolute : true,
+      autoUpdate: true,
+      scrollbars: {
+        autoHide: "scroll"
+      }
+    });
+  }
+
   render() {
     return (
       <div className="content-wrapper">
-        <ContentHeader title={this.props.title} />
+        <ContentHeader>{this.props.title}</ContentHeader>
         <Content>
           {this.props.children}
         </Content>

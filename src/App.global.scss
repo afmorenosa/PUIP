@@ -9,3 +9,8 @@
 .frame-titlebar * {
   -webkit-app-region: no-drag;
 }
+
+.content-wrapper {
+  height: 0 !important;
+  padding-bottom: 0 !important;
+}
