@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
+import $ from "jquery";
 import Header from "./components/Header";
 import MainSidebar from "./components/MainSidebar";
 import Footer from "./components/Footer";
@@ -35,6 +36,14 @@ class App extends Component {
     };
 
     return Routes.map((route) => { return getList(route, ""); });
+  }
+
+  componentDidMount() {
+    $(document.body).overlayScrollbars({
+      scrollbars: {
+        autoHide: "move"
+      }
+    });
   }
 
   render() {
