@@ -1,7 +1,20 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import $ from "jquery";
+import Routes from "../Routes";
 
 class MainSidebar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loadedPage: 1
+    };
+
+    this.handleChangePage = this.handleChangePage.bind(this);
+    this.renderLinkList = this.renderLinkList.bind(this);
+  }
+
   componentDidMount() {
     // We should activate by our own the scrollbars in the sidebar as
     // React doesn't do that
@@ -11,6 +24,56 @@ class MainSidebar extends Component {
         autoHide: "leave"
       }
     });
+  }
+
+  handleChangePage() {
+  }
+
+  renderLinkList() {
+    let sidebar = this;
+
+    const getList = function(route, parentRoute) {
+      let link;
+      let fullRoute = parentRoute + route.route;
+
+      if(route.subroutes == undefined) {
+        link = (
+          <li className="nav-item" key={fullRoute}>
+            <Link
+              className="nav-link"
+              to={fullRoute}
+              onClick={sidebar.handleChangePage}
+              replace>
+              <i className={"nav-icon " + route.icon}></i>
+              <p>{ route.name }</p>
+            </Link>
+          </li>
+        );
+      } else {
+        link = (
+          <li className="nav-item" key={fullRoute}>
+            <a role="button" className="nav-link">
+              <i className={"nav-icon " + route.icon}></i>
+              <p>
+                { route.name }
+                <i className="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul className="nav nav-treeview">
+              {
+                route.subroutes.map((route) => {
+                  return getList(route, fullRoute);
+                })
+              }
+            </ul>
+          </li>
+        );
+      }
+
+      return link;
+    };
+
+    return Routes.map((route) => { return getList(route, ""); });
   }
 
   render() {
@@ -39,32 +102,10 @@ class MainSidebar extends Component {
           </form>
 
           {/* Sidebar Menu */}
-          <nav className="mt-2">
+          <nav className="mt-3">
             <ul className="nav nav-child-indent nav-flat nav-pills nav-sidebar flex-column"
                 data-widget="treeview" role="menu" data-accordion="false">
-              <li className="nav-item">
-                <a className="nav-link active" href="/">
-                  <i className="nav-icon fas fa-home"></i>
-                  <p>Home</p>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" role="button">
-                  <i className="nav-icon fas fa-boxes"></i>
-                  <p>
-                    Inventory
-                    <i className="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul className="nav nav-treeview">
-                  <li className="nav-item">
-                    <a className="nav-link" href="#products">
-                      <i className="nav-icon fas fa-plus"></i>
-                      <p>New Product</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {this.renderLinkList()}
             </ul>
           </nav>
         </div>
