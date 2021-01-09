@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import $ from "jquery";
 import Routes from "../Routes";
 
@@ -7,8 +7,10 @@ class MainSidebar extends Component {
   constructor(props) {
     super(props);
 
+    console.log(props.location.pathname);
+
     this.state = {
-      loadedPage: "/"
+      loadedPage: props.location.pathname
     };
 
     this.handleChangePage = this.handleChangePage.bind(this);
@@ -24,6 +26,11 @@ class MainSidebar extends Component {
         autoHide: "leave"
       }
     });
+
+    let item = $(".sidebar").find(".active");
+
+    item.parent().parents(".nav-item").addClass("menu-open").children(".nav-link").addClass("active");
+    console.log(item);
   }
 
   handleChangePage(event) {
@@ -128,4 +135,4 @@ class MainSidebar extends Component {
   }
 }
 
-export default MainSidebar;
+export default withRouter(MainSidebar);
