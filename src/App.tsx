@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { HashRouter, Switch, Route } from 'react-router-dom';
-import Header from "./components/Header.tsx";
-import MainSidebar from "./components/MainSidebar.tsx";
-import Footer from "./components/Footer.tsx";
+import { HashRouter, Switch, Route } from "react-router-dom";
+import Header from "./components/Header";
+import MainSidebar from "./components/MainSidebar";
+import Footer from "./components/Footer";
 import Routes from "./Routes";
 
 class App extends Component {

@@ -1,11 +1,13 @@
 import React from "react";
+import ProductCreate from "./components/product/Create";
+import ContentWrapper from "./components/common/ContentWrapper";
 
 const Routes = [
   {
     "name": "Home",
     "route": "/",
     "icon": "fas fa-home",
-    "component": <div></div>
+    "component": <ContentWrapper />
   },
   {
     "name": "Product",
@@ -15,7 +17,7 @@ const Routes = [
       "name": "New Product",
       "route": "/create",
       "icon": "fas fa-plus",
-      "component": <div>Works?</div>
+      "component": <ProductCreate />
     }]
   }
 ];
