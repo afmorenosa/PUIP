@@ -7,18 +7,20 @@ const Routes = [
     "name": "Home",
     "route": "/",
     "icon": "fas fa-home",
-    "component": <ContentWrapper />
+    "component": <ContentWrapper title="Home" />
   },
   {
     "name": "Product",
     "route": "/product",
     "icon": "fas fa-boxes",
-    "subroutes": [{
-      "name": "New Product",
-      "route": "/create",
-      "icon": "fas fa-plus",
-      "component": <ProductCreate />
-    }]
+    "subroutes": [
+      {
+        "name": "New Product",
+        "route": "/create",
+        "icon": "fas fa-plus",
+        "component": <ProductCreate />
+      }
+    ]
   }
 ];
 
