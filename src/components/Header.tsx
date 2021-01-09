@@ -5,6 +5,13 @@ import $ from "jquery";
 const window = remote.getCurrentWindow();
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    window.on("maximize", this.updateMaximizeButton);
+    window.on("unmaximize", this.updateMaximizeButton);
+  }
+
   render() {
     return (
       <nav className="main-header navbar navbar-expand navbar-light frame-titlebar">
@@ -72,16 +79,22 @@ class Header extends Component {
   handleMaximizeButtonClick() {
     if (window.isMaximized()) {
       window.unmaximize();
-      $("#frame-maximize")
-        .find($(".fa-window-restore"))
-        .removeClass("fa-window-restore")
-        .addClass("fa-window-maximize");
     } else {
       window.maximize();
+    }
+  }
+
+  updateMaximizeButton() {
+    if (window.isMaximized()) {
       $("#frame-maximize")
         .find($(".fa-window-maximize"))
         .removeClass("fa-window-maximize")
         .addClass("fa-window-restore");
+    } else {
+      $("#frame-maximize")
+        .find($(".fa-window-restore"))
+        .removeClass("fa-window-restore")
+        .addClass("fa-window-maximize");
     }
   }
 
