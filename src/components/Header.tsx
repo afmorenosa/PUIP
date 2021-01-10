@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { remote } from "electron";
-import $ from "jquery";
 
 const window = remote.getCurrentWindow();
 

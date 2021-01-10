@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import $ from "jquery";
 import Routes from "../Routes";
 
 class MainSidebar extends Component {
@@ -20,27 +19,27 @@ class MainSidebar extends Component {
   componentDidMount() {
     // We should activate by our own the scrollbars in the sidebar as
     // React doesn't do that
-    $(".sidebar").overlayScrollbars({
+    window.$(".sidebar").overlayScrollbars({
       className: "os-theme-light",
       scrollbars: {
         autoHide: "leave"
       }
     });
 
-    let item = $(".sidebar").find(".active");
+    let item = window.$(".sidebar").find(".active");
 
     item.parent().parents(".nav-item").addClass("menu-open").children(".nav-link").addClass("active");
     console.log(item);
   }
 
   handleChangePage(event) {
-    let item = $(event.currentTarget);
+    let item = window.$(event.currentTarget);
     this.setState(
       {
         loadedPage: event.currentTarget.href.split("#")[1]
       },
       () => {
-        $(".sidebar *").removeClass("active");
+        window.$(".sidebar *").removeClass("active");
         item.addClass("active");
         item.parent().parents(".menu-open").children(".nav-link").addClass("active");
       }

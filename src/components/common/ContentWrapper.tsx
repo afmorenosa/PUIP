@@ -4,7 +4,7 @@ import Content from "./Content";
 
 class ContentWrapper extends Component {
   componentDidMount() {
-    $(".content-wrapper").overlayScrollbars({
+    window.$(".content-wrapper").overlayScrollbars({
       sizeAutoCapable : true,
       paddingAbsolute : true,
       autoUpdate: true,
