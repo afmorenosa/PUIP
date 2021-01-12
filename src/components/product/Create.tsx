@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
+import Product from "../../models/Product";
 
 class ProductCreate extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class ProductCreate extends Component {
 
     this.state = {
       name: "",
-      detail: ""
+      detail: "",
+      code: "",
+      image: "" // The image input stores the file path
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -34,20 +37,28 @@ class ProductCreate extends Component {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+    this.setState(
+      {
+        [name]: value
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   }
 
   handleSubmit(event) {
     console.log(this.state);
+
+    new Product(this.state).save().then();
+
     event.preventDefault();
   }
 
   render() {
     return (
       <ContentWrapper title="New Product">
-        <Form onSubmit={this.handleSubmit}>
+        <Form id="create-product-form" onSubmit={this.handleSubmit}>
           <Row>
             <Col lg="6">
               <Card className="card-primary">
@@ -65,7 +76,7 @@ class ProductCreate extends Component {
                     <Form.Label>Product Name</Form.Label>
                     <Form.Control
                       name="name"
-                      value={this.state.productName}
+                      value={this.state.name}
                       onInput={this.handleInputChange}
                       type="text" />
                   </Form.Group>
@@ -73,14 +84,18 @@ class ProductCreate extends Component {
                     <Form.Label>Product Detail</Form.Label>
                     <Form.Control
                       name="detail"
-                      value={this.state.productDetail}
+                      value={this.state.detail}
                       onInput={this.handleInputChange}
                       as="textarea"
                       rows="4" />
                   </Form.Group>
                   <Form.Group controlId="product-code">
                     <Form.Label>Product Code</Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Control
+                      name="code"
+                      value={this.state.code}
+                      onInput={this.handleInputChange}
+                      type="text" />
                     <Form.Text className="text-muted">
                       It's highly encouraged to use the barcode of the product.
                     </Form.Text>
@@ -102,6 +117,8 @@ class ProductCreate extends Component {
                   <Form.Group controlId="product-image">
                     <Form.Label>Product Image</Form.Label>
                     <Form.File.Input
+                      name="image"
+                      onInput={this.handleInputChange}
                       data-preview-file-type="image"
                       data-browse-on-zone-click="true" />
                   </Form.Group>
@@ -143,7 +160,8 @@ class ProductCreate extends Component {
                       <Form.Control type="number" min="0" />
                     </InputGroup>
                     <Form.Text className="text-muted">
-                      Here goes the price at which you plan to sell the product.
+                      Here goes the price at which you plan to sell
+                      the product without taxes.
                     </Form.Text>
                   </Form.Group>
                   <Form.Group controlId="product-tax">
