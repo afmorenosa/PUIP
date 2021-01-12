@@ -6,8 +6,6 @@ class MainSidebar extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props.location.pathname);
-
     this.state = {
       loadedPage: props.location.pathname
     };
@@ -28,8 +26,12 @@ class MainSidebar extends Component {
 
     let item = window.$(".sidebar").find(".active");
 
-    item.parent().parents(".nav-item").addClass("menu-open").children(".nav-link").addClass("active");
-    console.log(item);
+    item
+      .parent()
+      .parents(".nav-item")
+      .addClass("menu-open")
+      .children(".nav-link")
+      .addClass("active");
   }
 
   handleChangePage(event) {
@@ -41,7 +43,11 @@ class MainSidebar extends Component {
       () => {
         window.$(".sidebar *").removeClass("active");
         item.addClass("active");
-        item.parent().parents(".menu-open").children(".nav-link").addClass("active");
+        item
+          .parent()
+          .parents(".menu-open")
+          .children(".nav-link")
+          .addClass("active");
       }
     );
   }

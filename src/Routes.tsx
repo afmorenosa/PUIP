@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCreate from "./components/product/Create";
+import Product from "./components/product";
 import ContentWrapper from "./components/common/ContentWrapper";
 
 const Routes = [
@@ -18,7 +18,7 @@ const Routes = [
         "name": "New Product",
         "route": "/create",
         "icon": "fas fa-plus",
-        "component": <ProductCreate />
+        "component": <Product.Create />
       }
     ]
   }
