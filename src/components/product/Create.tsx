@@ -9,6 +9,7 @@ import {
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
 import Product from "../../models/Product";
+import jValidateOpt from "../../helpers/jQueryValidation";
 
 class ProductCreate extends Component {
   constructor(props) {
@@ -29,6 +30,15 @@ class ProductCreate extends Component {
     window.$(".form-control-file").fileinput({
       language: "en",
       theme: "fas"
+    });
+
+    window.$("#create-product-form").validate({
+      rules: {
+        name: {
+          required: true
+        }
+      },
+      ...jValidateOpt
     });
   }
 
