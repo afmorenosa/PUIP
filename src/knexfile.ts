@@ -4,6 +4,11 @@ const KnexConfig = {
     connection: {
       filename: "./dev.db"
     },
+    pool: {
+      afterCreate: function (conn, done) {
+        conn.run("pragma foreign_keys = on", done);
+      }
+    },
     migrations: {
       tableName: "migrations",
       extension: "ts",
@@ -17,10 +22,15 @@ const KnexConfig = {
     connection: {
       filename: "./dev.db"
     },
+    pool: {
+      afterCreate: function (conn, done) {
+        conn.run("pragma foreign_keys = on", done);
+      }
+    },
     migrations: {
       tableName: "migrations",
       extension: "ts",
-      directory: "./src/migrations"
+      directory: "./migrations"
     },
     useNullAsDefault: true
   }

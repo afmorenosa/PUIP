@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import {
   Row,
   Col,
@@ -9,7 +10,9 @@ import {
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
 import Product from "../../models/Product";
+import db from "../../Database";
 import jValidateOpt from "../../helpers/jQueryValidation";
+import fs from "fs";
 
 class ProductCreate extends Component {
   constructor(props) {
@@ -19,9 +22,14 @@ class ProductCreate extends Component {
       name: "",
       detail: "",
       code: "",
-      image: "" // The image input stores the file path
+      cost: "",
+      price: "",
+      tax: "",
+      quantity: "",
+      storing: undefined
     };
 
+    this.imageInput = React.createRef();
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,9 +41,35 @@ class ProductCreate extends Component {
     });
 
     window.$("#create-product-form").validate({
-      rules: {
+      messages: {
         name: {
-          required: true
+          required: "Insert a proper product name"
+        },
+        detail: {
+          required: "Insert a brief description of the product"
+        },
+        code: {
+          required: "Insert the code of the product",
+          minlength: "The product code must have at least 3 characters"
+        },
+        cost: {
+          required: "Insert the product cost",
+          min: "The cost can't be negative"
+        },
+        price: {
+          required: "Insert the product price",
+          min: "The product price can't be negative"
+        },
+        tax: {
+          required: "Insert the product tax",
+          min: "THe product tax can't be negative"
+        },
+        image: {
+          required: "Insert a product image"
+        },
+        quantity: {
+          required: "Insert the product actual quantity",
+          min: "The quantity can't be negative"
         }
       },
       ...jValidateOpt
@@ -47,20 +81,22 @@ class ProductCreate extends Component {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    this.setState(
-      {
-        [name]: value
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit(event) {
-    console.log(this.state);
+    this.setState(
+      {
+        image: fs.readFileSync(this.imageInput.current.files[0].path)
+      },
+      () => {
+        new Product(this.state).save();
 
-    new Product(this.state).save().then();
+        this.props.history.push("/");
+      }
+    );
 
     event.preventDefault();
   }
@@ -87,26 +123,30 @@ class ProductCreate extends Component {
                     <Form.Control
                       name="name"
                       value={this.state.name}
-                      onInput={this.handleInputChange}
-                      type="text" />
+                      onChange={this.handleInputChange}
+                      type="text"
+                      required />
                   </Form.Group>
                   <Form.Group controlId="product-detail">
                     <Form.Label>Product Detail</Form.Label>
                     <Form.Control
                       name="detail"
                       value={this.state.detail}
-                      onInput={this.handleInputChange}
+                      onChange={this.handleInputChange}
                       as="textarea"
-                      rows="4" />
+                      rows="4"
+                      required />
                   </Form.Group>
                   <Form.Group controlId="product-code">
                     <Form.Label>Product Code</Form.Label>
                     <Form.Control
                       name="code"
                       value={this.state.code}
-                      onInput={this.handleInputChange}
-                      type="text" />
-                    <Form.Text className="text-muted">
+                      onChange={this.handleInputChange}
+                      type="text"
+                      minLength="3"
+                      required />
+                    <Form.Text muted>
                       It's highly encouraged to use the barcode of the product.
                     </Form.Text>
                   </Form.Group>
@@ -128,9 +168,14 @@ class ProductCreate extends Component {
                     <Form.Label>Product Image</Form.Label>
                     <Form.File.Input
                       name="image"
-                      onInput={this.handleInputChange}
+                      ref={this.imageInput}
                       data-preview-file-type="image"
-                      data-browse-on-zone-click="true" />
+                      data-browse-on-zone-click="true"
+                      required />
+                    <Form.Text muted>
+                      Use a square sized image, it will be resized to
+                      600x600 when uploaded.
+                    </Form.Text>
                   </Form.Group>
                 </Card.Body>
               </Card>
@@ -154,9 +199,16 @@ class ProductCreate extends Component {
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                      <Form.Control type="number" min="0" />
+                      <Form.Control
+                        name="cost"
+                        value={this.state.cost}
+                        onChange={this.handleInputChange}
+                        type="number"
+                        min="0"
+                        step="any"
+                        required />
                     </InputGroup>
-                    <Form.Text className="text-muted">
+                    <Form.Text muted>
                       Here goes the price at which the product is
                       purchased from the distributor.
                     </Form.Text>
@@ -167,9 +219,16 @@ class ProductCreate extends Component {
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                      <Form.Control type="number" min="0" />
+                      <Form.Control
+                        name="price"
+                        value={this.state.price}
+                        onChange={this.handleInputChange}
+                        type="number"
+                        min="0"
+                        step="any"
+                        required />
                     </InputGroup>
-                    <Form.Text className="text-muted">
+                    <Form.Text muted>
                       Here goes the price at which you plan to sell
                       the product without taxes.
                     </Form.Text>
@@ -177,12 +236,19 @@ class ProductCreate extends Component {
                   <Form.Group controlId="product-tax">
                     <Form.Label>Product Tax</Form.Label>
                     <InputGroup>
-                      <Form.Control type="number" min="0" />
+                      <Form.Control
+                        name="tax"
+                        value={this.state.tax}
+                        onChange={this.handleInputChange}
+                        type="number"
+                        min="0"
+                        step="any"
+                        required />
                       <InputGroup.Append>
                         <InputGroup.Text>%</InputGroup.Text>
                       </InputGroup.Append>
                     </InputGroup>
-                    <Form.Text className="text-muted">
+                    <Form.Text muted>
                       Here goes the product product tax percentage.
                     </Form.Text>
                   </Form.Group>
@@ -202,15 +268,26 @@ class ProductCreate extends Component {
                   <Card.Text>Here goes all the storing information</Card.Text>
                   <Form.Group controlId="product-quantity">
                     <Form.Label>Product Initial Inventory</Form.Label>
-                    <Form.Control type="number" min="0" />
-                    <Form.Text className="text-muted">
+                    <Form.Control
+                      name="quantity"
+                      value={this.state.quantity}
+                      onChange={this.handleInputChange}
+                      type="number"
+                      min="0"
+                      required />
+                    <Form.Text muted>
                       Here goes the initial or actuall quantity of product that you own.
                     </Form.Text>
                   </Form.Group>
                   <Form.Group controlId="product-storing-detail">
                     <Form.Label>Product Location Details</Form.Label>
-                    <Form.Control as="textarea" rows="4" />
-                    <Form.Text className="text-muted">
+                    <Form.Control
+                      name="storing"
+                      value={this.state.storing}
+                      onChange={this.handleInputChange}
+                      as="textarea"
+                      rows="4" />
+                    <Form.Text muted>
                       Here goes the storing location of the product, in
                       case that needed. <br/>
 
@@ -238,4 +315,4 @@ class ProductCreate extends Component {
   }
 }
 
-export default ProductCreate;
+export default withRouter(ProductCreate);

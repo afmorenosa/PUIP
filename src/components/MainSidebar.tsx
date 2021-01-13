@@ -24,6 +24,10 @@ class MainSidebar extends Component {
       }
     });
 
+    this.unlisten = this.props.history.listen((location) => {
+      this.updateNavBar(location);
+    });
+
     let item = window.$(".sidebar").find(".active");
 
     item
@@ -34,22 +38,26 @@ class MainSidebar extends Component {
       .addClass("active");
   }
 
+  componentWillUnmount() {
+    this.unlisten();
+  }
+
   handleChangePage(event) {
     let item = window.$(event.currentTarget);
-    this.setState(
-      {
-        loadedPage: event.currentTarget.href.split("#")[1]
-      },
-      () => {
-        window.$(".sidebar *").removeClass("active");
-        item.addClass("active");
-        item
-          .parent()
-          .parents(".menu-open")
-          .children(".nav-link")
-          .addClass("active");
-      }
-    );
+    this.setState({
+      loadedPage: event.currentTarget.href.split("#")[1]
+    });
+  }
+
+  updateNavBar(location) {
+    let item = window.$(`.sidebar [href='#${location.pathname}']`);
+    window.$(".sidebar *").removeClass("active");
+    item.addClass("active");
+    item
+      .parent()
+      .parents(".menu-open")
+      .children(".nav-link")
+      .addClass("active");
   }
 
   renderLinkList() {
