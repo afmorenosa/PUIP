@@ -26,7 +26,7 @@ class ProductCreate extends Component {
       price: "",
       tax: "",
       quantity: "",
-      storing: undefined
+      storing: ""
     };
 
     this.imageInput = React.createRef();
@@ -92,7 +92,17 @@ class ProductCreate extends Component {
         image: fs.readFileSync(this.imageInput.current.files[0].path)
       },
       () => {
-        new Product(this.state).save();
+        new Product({
+          name: this.state.name,
+          detail: this.state.detail,
+          code: this.state.code,
+          image: this.state.image,
+          cost: this.state.cost,
+          price: this.state.price,
+          tax: this.state.tax / 100,
+          quantity: this.state.quantity,
+          storing: this.state.storing || null
+        }).save();
 
         this.props.history.push("/");
       }
