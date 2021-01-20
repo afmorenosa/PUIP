@@ -5,6 +5,7 @@ const KnexConfig = {
       filename: "./dev.db"
     },
     pool: {
+      max: 1,
       afterCreate: function (conn, done) {
         conn.run("pragma foreign_keys = on", done);
       }
@@ -14,7 +15,8 @@ const KnexConfig = {
       extension: "ts",
       directory: "./src/migrations"
     },
-    useNullAsDefault: true
+    useNullAsDefault: true,
+    debug: true
   },
 
   production: {
@@ -23,6 +25,7 @@ const KnexConfig = {
       filename: "./dev.db"
     },
     pool: {
+      max: 1,
       afterCreate: function (conn, done) {
         conn.run("pragma foreign_keys = on", done);
       }
