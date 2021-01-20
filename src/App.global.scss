@@ -1,20 +1,37 @@
-@import "~@fortawesome/fontawesome-free/css/all.css";
+// Import FontAwesome style
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+
+// Import Overlay Scrollbars style
 @import "~overlayscrollbars/css/OverlayScrollbars.css";
-@import "~bootstrap-fileinput/css/fileinput.css";
+
+// Import Bootstrap FileInput style
+$url-0: url(~bootstrap-fileinput/img/loading.gif);
+$url-1: url(~bootstrap-fileinput/img/loading-sm.gif);
+@import "~bootstrap-fileinput/scss/fileinput.scss";
+
+// Import AdminLTE style
 @import "~admin-lte/build/scss/adminlte.scss";
 
+// As we need to move the window around, create a class for
 .frame-titlebar {
     -webkit-app-region: drag;
 }
 
+// But we shouldn't move from the buttons, so delete everything else
+// from the drag
 .frame-titlebar * {
   -webkit-app-region: no-drag;
 }
 
+// Fix the content missing padding
 .content {
   padding: 0 0.5*$spacer;
 }
 
+// Workaround for main body Overlay Scrollbars
 .content-wrapper {
   height: 0 !important;
   padding-bottom: 0 !important;
