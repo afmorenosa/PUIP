@@ -19,6 +19,12 @@ const Routes = [
         "route": "/create",
         "icon": "fas fa-plus",
         "component": <Product.Create />
+      },
+      {
+        "name": "All Products",
+        "route": "/all",
+        "icon": "fas fa-pallet",
+        "component": <Product.All />
       }
     ]
   }

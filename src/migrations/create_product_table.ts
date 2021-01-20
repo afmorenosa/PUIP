@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema
-    .createTable("products", function (table) {
+    .createTable("product", function (table) {
       table.increments();
 
       table.text("name").notNullable();
@@ -20,5 +20,5 @@ exports.up = function (knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTable("products");
+    .dropTable("product");
 };

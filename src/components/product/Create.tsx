@@ -10,7 +10,6 @@ import {
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
 import Product from "../../models/Product";
-import db from "../../Database";
 import jValidateOpt from "../../helpers/jQueryValidation";
 import fs from "fs";
 
@@ -104,7 +103,7 @@ class ProductCreate extends Component {
           storing: this.state.storing || null
         }).save();
 
-        this.props.history.push("/");
+        this.props.history.push("/product/all");
       }
     );
 

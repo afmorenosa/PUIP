@@ -43,7 +43,6 @@ class MainSidebar extends Component {
   }
 
   handleChangePage(event) {
-    let item = window.$(event.currentTarget);
     this.setState({
       loadedPage: event.currentTarget.href.split("#")[1]
     });

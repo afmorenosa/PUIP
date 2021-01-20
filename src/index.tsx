@@ -4,6 +4,4 @@ import App from "./App";
 import "./App.global.scss";
 import db from "./Database";
 
-console.log(db);
-
 render(<App />, window.$(".wrapper")[0]);
