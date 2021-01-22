@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
-import MainSidebar from "./components/MainSidebar";
-import Footer from "./components/Footer";
+import Layout from "./components/layout";
 import Routes from "./Routes";
 
 class App extends Component {
@@ -41,12 +39,12 @@ class App extends Component {
     return (
       <>
         <HashRouter>
-          <Header />
-          <MainSidebar />
+          <Layout.Header />
+          <Layout.MainSidebar />
           <Switch >
             {this.renderPageList()}
           </Switch>
-          <Footer />
+          <Layout.Footer />
         </HashRouter>
       </>
     );

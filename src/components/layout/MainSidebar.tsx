@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Routes from "../Routes";
+import Routes from "../../Routes";
 
 class MainSidebar extends Component {
   constructor(props) {
