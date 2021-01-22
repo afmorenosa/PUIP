@@ -65,7 +65,6 @@ class ProductAll extends Component {
                   <thead>
                     <tr>
                       <th>ID</th>
-                      {/* <th>Image</th> */}
                       <th>Name</th>
                       <th>Code</th>
                       <th>Cost</th>
