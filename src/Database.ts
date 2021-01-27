@@ -3,14 +3,30 @@ import KnexStringcase from "knex-stringcase"
 import KnexConfig from "./knexfile";
 import BookShelf from "bookshelf";
 
-const db = BookShelf(Knex(KnexStringcase(KnexConfig[process.env.NODE_ENV  || 'development'])));
+class db {
+  bsdb = null;
 
-db.knex.migrate.latest().then(([batchNo, log]) => {
-  if (!log.length) {
-    console.log('Database is already up to date');
-  } else {
-    console.log('Ran migrations: ' + log.join(', '));
+  importData() {
+    this.bsdb = BookShelf(
+      Knex(
+        KnexStringcase(
+          KnexConfig[
+            process.env.NODE_ENV  || 'development'
+          ]
+        )
+      )
+    )
   }
-});
+
+  migrate() {
+    this.bsdb.knex.migrate.latest().then(([batchNo, log]) => {
+      if (!log.length) {
+        console.log('Database is already up to date');
+      } else {
+        console.log('Ran migrations: ' + log.join(', '));
+      }
+    });
+  }
+}
 
 export default db;

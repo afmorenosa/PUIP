@@ -11,6 +11,36 @@ class Header extends Component {
     window.on("unmaximize", this.updateMaximizeButton);
   }
 
+  handleCloseButtonClick() {
+    window.close();
+  }
+
+  handleMaximizeButtonClick() {
+    if (window.isMaximized()) {
+      window.unmaximize();
+    } else {
+      window.maximize();
+    }
+  }
+
+  updateMaximizeButton() {
+    if (window.isMaximized()) {
+      $("#frame-maximize")
+        .find($(".fa-window-maximize"))
+        .removeClass("fa-window-maximize")
+        .addClass("fa-window-restore");
+    } else {
+      $("#frame-maximize")
+        .find($(".fa-window-restore"))
+        .removeClass("fa-window-restore")
+        .addClass("fa-window-maximize");
+    }
+  }
+
+  handleIconizeButtonClick() {
+    window.minimize();
+  }
+
   render() {
     return (
       <nav className="main-header navbar navbar-expand navbar-light frame-titlebar">
@@ -69,36 +99,6 @@ class Header extends Component {
         </ul>
       </nav>
     );
-  }
-
-  handleCloseButtonClick() {
-    window.close();
-  }
-
-  handleMaximizeButtonClick() {
-    if (window.isMaximized()) {
-      window.unmaximize();
-    } else {
-      window.maximize();
-    }
-  }
-
-  updateMaximizeButton() {
-    if (window.isMaximized()) {
-      $("#frame-maximize")
-        .find($(".fa-window-maximize"))
-        .removeClass("fa-window-maximize")
-        .addClass("fa-window-restore");
-    } else {
-      $("#frame-maximize")
-        .find($(".fa-window-restore"))
-        .removeClass("fa-window-restore")
-        .addClass("fa-window-maximize");
-    }
-  }
-
-  handleIconizeButtonClick() {
-    window.minimize();
   }
 }
 

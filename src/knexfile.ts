@@ -1,9 +1,6 @@
 const KnexConfig = {
   development: {
     client: "sqlite3",
-    connection: {
-      filename: "./dev.db"
-    },
     pool: {
       max: 1,
       afterCreate: function (conn, done) {
@@ -21,9 +18,6 @@ const KnexConfig = {
 
   production: {
     client: "sqlite3",
-    connection: {
-      filename: "./dev.db"
-    },
     pool: {
       max: 1,
       afterCreate: function (conn, done) {

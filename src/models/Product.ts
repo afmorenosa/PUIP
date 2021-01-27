@@ -1,6 +1,6 @@
 import db from "../Database";
 
-const Product = db.model("Product", {
+const Product = db.bsdb.model("Product", {
   tableName: "product",
   hasTimestamps: true
 });
