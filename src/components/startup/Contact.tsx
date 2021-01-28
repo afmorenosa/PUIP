@@ -71,7 +71,7 @@ class Contact extends Component {
                   value={this.state.phone}
                   onChange={this.handleInputChange}
                   placeholder="Phone Number"
-                  type="phone"
+                  type="tel"
                   required />
                 <InputGroup.Append>
                   <InputGroup.Text>
