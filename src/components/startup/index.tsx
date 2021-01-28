@@ -3,6 +3,7 @@ import { remote } from "electron";
 import Welcome from "./Welcome";
 import Address from "./Address";
 import Contact from "./Contact";
+import Confirmation from "./Confirmation";
 
 const rendererWindow = remote.getCurrentWindow();
 
@@ -11,27 +12,24 @@ class StartUp extends Component {
     super(props);
 
     this.state = {
-      step: 0
+      step: 0,
+      business: {
+        name: "",
+        address: "",
+        city: "",
+        postalCode: "",
+        phone: "",
+        email: ""
+      }
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleNew = this.handleNew.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
   }
 
   handleNew(step, business) {
     this.setState({
       step: step,
-      ...business
+      business: business
     });
   }
 
@@ -48,7 +46,7 @@ class StartUp extends Component {
     case 1:
       return (
         <Address
-          name={this.state.name}
+          business={this.state.business}
           onContinue={this.handleNew}
           onClose={this.handleClose} />
       );
@@ -56,12 +54,23 @@ class StartUp extends Component {
     case 2:
       return (
         <Contact
-          name={this.state.name} />
+          business={this.state.business}
+          onContinue={this.handleNew}
+          onClose={this.handleClose} />
+      );
+
+    case 3:
+      return (
+        <Confirmation
+          business={this.state.business}
+          onReset={this.handleNew}
+          onClose={this.handleClose} />
       );
 
     default:
       return (
         <Welcome
+          business={this.state.business}
           onNew={this.handleNew}
         /* onUpload={this.handleUpload} */
           onClose={this.handleClose} />

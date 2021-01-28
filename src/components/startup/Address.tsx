@@ -7,15 +7,11 @@ import {
 import Card from "../common/Card";
 import jValidateOpt from "../../helpers/jQueryValidation";
 
-class New extends Component {
+class Address extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      name: this.props.name,
-      address: "",
-      city: ""
-    };
+    this.state = this.props.business;
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -135,4 +131,4 @@ class New extends Component {
   }
 }
 
-export default New;
+export default Address;

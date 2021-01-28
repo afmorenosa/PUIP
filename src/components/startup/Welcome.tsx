@@ -11,9 +11,7 @@ class Welcome extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      name: ""
-    };
+    this.state = this.props.business;
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
