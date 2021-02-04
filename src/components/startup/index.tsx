@@ -4,6 +4,10 @@ import Welcome from "./Welcome";
 import Address from "./Address";
 import Contact from "./Contact";
 import Confirmation from "./Confirmation";
+import path from "path";
+import fs from "fs";
+import config from "../../config";
+import db from "../../databases";
 
 const rendererWindow = remote.getCurrentWindow();
 
@@ -24,6 +28,7 @@ class StartUp extends Component {
     };
 
     this.handleNew = this.handleNew.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
   }
 
   handleNew(step, business) {
@@ -33,8 +38,35 @@ class StartUp extends Component {
     });
   }
 
-  handleOpen() {
+  handleUpload() {
     alert("Click open");
+  }
+
+  handleCreate() {
+    let databasePath = remote.dialog.showSaveDialogSync({
+      title: "Create a new PUIP file",
+      filters: [
+        { name: "PUIP Business File", extensions: ["puip"] }
+      ]
+    });
+
+    if (databasePath == undefined) {
+      return;
+    }
+
+    if(fs.existsSync(databasePath)) {
+      fs.unlinkSync(databasePath);
+    }
+
+    db.loadFile(databasePath);
+    db.migrate().then(() => {
+      db.loadModels();
+      db.bsdb.knex.insert([this.state.business]).into("business")
+        .then();
+    }).finally(() => {
+      config.addToConfig("last_file", databasePath);
+      this.props.handleCreate();
+    });
   }
 
   handleClose() {
@@ -64,6 +96,7 @@ class StartUp extends Component {
         <Confirmation
           business={this.state.business}
           onReset={this.handleNew}
+          onCreate={this.handleCreate}
           onClose={this.handleClose} />
       );
 

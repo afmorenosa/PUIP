@@ -9,8 +9,7 @@ import {
 } from "react-bootstrap";
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
-import Product from "../../models/Product";
-import fs from "fs";
+import db from "../../databases";
 
 class ProductAll extends Component {
   constructor(props) {
@@ -22,7 +21,9 @@ class ProductAll extends Component {
       products: []
     };
 
-    Product.fetchAll().then((products) => {
+    console.log(db.bsdb);
+
+    db.Product.fetchAll().then((products) => {
       self.setState({
         products: products
       });

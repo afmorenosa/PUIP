@@ -22,7 +22,7 @@ class Confirmation extends Component {
   }
 
   handleSubmit(event) {
-    location.reload();
+    this.props.onCreate();
 
     event.preventDefault();
   }

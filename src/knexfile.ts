@@ -10,7 +10,7 @@ const KnexConfig = {
     migrations: {
       tableName: "migrations",
       extension: "ts",
-      directory: "./src/migrations"
+      directory: "./src/databases/migrations"
     },
     useNullAsDefault: true,
     debug: true
@@ -27,7 +27,7 @@ const KnexConfig = {
     migrations: {
       tableName: "migrations",
       extension: "ts",
-      directory: "./migrations"
+      directory: "./databases/migrations"
     },
     useNullAsDefault: true
   }

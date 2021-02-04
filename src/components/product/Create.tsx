@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
-import Product from "../../models/Product";
+import db from "../../databases";
 import jValidateOpt from "../../helpers/jQueryValidation";
 import fs from "fs";
 
@@ -91,7 +91,7 @@ class ProductCreate extends Component {
         image: fs.readFileSync(this.imageInput.current.files[0].path)
       },
       () => {
-        new Product({
+        new db.Product({
           name: this.state.name,
           detail: this.state.detail,
           code: this.state.code,
