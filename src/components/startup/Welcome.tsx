@@ -14,6 +14,7 @@ class Welcome extends Component {
     this.state = this.props.business;
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -37,6 +38,10 @@ class Welcome extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  handleOpen() {
+    this.props.onUpload();
   }
 
   handleSubmit(event) {

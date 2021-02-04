@@ -28,6 +28,7 @@ class StartUp extends Component {
     };
 
     this.handleNew = this.handleNew.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
   }
 
@@ -39,7 +40,24 @@ class StartUp extends Component {
   }
 
   handleUpload() {
-    alert("Click open");
+    let databasePath = remote.dialog.showOpenDialogSync({
+      title: "Open a PUIP file",
+      filters: [
+        { name: "PUIP Business File", extensions: ["puip"] }
+      ]
+    });
+
+    if (databasePath == undefined) {
+      return;
+    }
+
+    db.loadFile(databasePath[0]);
+    db.migrate().then(() => {
+      db.loadModels();
+    }).finally(() => {
+      config.addToConfig("last_file", databasePath);
+      this.props.handleLoad();
+    });
   }
 
   handleCreate() {
@@ -65,7 +83,7 @@ class StartUp extends Component {
         .then();
     }).finally(() => {
       config.addToConfig("last_file", databasePath);
-      this.props.handleCreate();
+      this.props.handleLoad();
     });
   }
 
@@ -105,7 +123,7 @@ class StartUp extends Component {
         <Welcome
           business={this.state.business}
           onNew={this.handleNew}
-        /* onUpload={this.handleUpload} */
+          onUpload={this.handleUpload}
           onClose={this.handleClose} />
       );
     }

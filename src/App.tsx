@@ -22,7 +22,7 @@ class App extends Component {
     };
 
     this.renderPageList = this.renderPageList.bind(this);
-    this.handleCreate = this.handleCreate.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
   }
 
   renderPageList() {
@@ -90,7 +90,7 @@ class App extends Component {
     }
   }
 
-  handleCreate() {
+  handleLoad() {
     this.setState({
       isFirstTime: false
     });
@@ -99,7 +99,7 @@ class App extends Component {
   render() {
     if (this.state.isFirstTime) {
       return (
-        <StartUp handleCreate={this.handleCreate}/>
+        <StartUp handleLoad={this.handleLoad}/>
       );
     }
 
