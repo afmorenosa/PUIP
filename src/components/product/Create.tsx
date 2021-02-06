@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
+import { getRoute } from "../../Routes";
 import db from "../../databases";
 import jValidateOpt from "../../helpers/jQueryValidation";
 import fs from "fs";
@@ -103,7 +104,7 @@ class ProductCreate extends Component {
           storing: this.state.storing || null
         }).save();
 
-        this.props.history.push("/product/all");
+        this.props.history.push(getRoute("product.all"));
       }
     );
 

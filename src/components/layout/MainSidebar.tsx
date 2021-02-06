@@ -94,7 +94,7 @@ class MainSidebar extends Component {
             </a>
             <ul className="nav nav-treeview">
               {
-                route.subroutes.map((route) => {
+                Object.values(route.subroutes).map((route) => {
                   return getList(route, fullRoute);
                 })
               }
@@ -106,7 +106,7 @@ class MainSidebar extends Component {
       return link;
     };
 
-    return Routes.map((route) => { return getList(route, ""); });
+    return Object.values(Routes).map((route) => { return getList(route, ""); });
   }
 
   render() {

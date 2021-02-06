@@ -55,7 +55,7 @@ class StartUp extends Component {
     db.migrate().then(() => {
       db.loadModels();
     }).finally(() => {
-      config.addToConfig("last_file", databasePath);
+      config.addToConfig("last_file", databasePath[0]);
       this.props.handleLoad();
     });
   }

@@ -40,14 +40,14 @@ class App extends Component {
         );
       } else {
         return (
-          route.subroutes.map((route) => {
+          Object.values(route.subroutes).map((route) => {
             return getList(route, fullRoute);
           })
         );
       }
     };
 
-    return Routes.map((route) => { return getList(route, ""); });
+    return Object.values(Routes).map((route) => { return getList(route, ""); });
   }
 
   componentDidMount() {
