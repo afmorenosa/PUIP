@@ -98,47 +98,30 @@ class StartUp extends Component {
   }
 
   render() {
-    let view;
-
-    switch (this.state.step) {
-    case 1:
-       view = (
-        <Address
-          business={this.state.business}
-          onContinue={this.handleNew}
-          onClose={this.handleClose} />
-      );
-
-    case 2:
-      view = (
-        <Contact
-          business={this.state.business}
-          onContinue={this.handleNew}
-          onClose={this.handleClose} />
-      );
-
-    case 3:
-      view = (
-        <Confirmation
-          business={this.state.business}
-          onReset={this.handleNew}
-          onCreate={this.handleCreate}
-          onClose={this.handleClose} />
-      );
-
-    default:
-      view = (
-        <Welcome
-          business={this.state.business}
-          onNew={this.handleNew}
-          onUpload={this.handleUpload}
-          onClose={this.handleClose} />
-      );
-    }
-
     return (
       <div className="login-box">
-        {view}
+        {
+          {
+            0: <Welcome
+                 business={this.state.business}
+                 onNew={this.handleNew}
+                 onUpload={this.handleUpload}
+                 onClose={this.handleClose} />,
+            1: <Address
+                 business={this.state.business}
+                 onContinue={this.handleNew}
+                 onClose={this.handleClose} />,
+            2: <Contact
+                 business={this.state.business}
+                 onContinue={this.handleNew}
+                 onClose={this.handleClose} />,
+            3: <Confirmation
+                 business={this.state.business}
+                 onReset={this.handleNew}
+                 onCreate={this.handleCreate}
+                 onClose={this.handleClose} />
+          }[this.state.step]
+        }
       </div>
     );
   }
