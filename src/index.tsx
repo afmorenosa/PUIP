@@ -3,4 +3,4 @@ import { render } from "react-dom";
 import "./App.global.scss";
 import App  from "./App";
 
-render(<App />, window.$(".wrapper")[0]);
+render(<App />, window.$("#root").get(0));

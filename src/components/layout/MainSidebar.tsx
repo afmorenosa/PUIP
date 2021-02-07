@@ -7,7 +7,8 @@ class MainSidebar extends Component {
     super(props);
 
     this.state = {
-      loadedPage: props.location.pathname
+      loadedPage: props.location.pathname,
+      loadPlugins: props.loadPlugins
     };
 
     this.handleChangePage = this.handleChangePage.bind(this);
@@ -23,6 +24,14 @@ class MainSidebar extends Component {
         autoHide: "leave"
       }
     });
+
+    if (this.state.loadPlugins) {
+      // We activate the Treeview Plugin
+      window.$("[data-widget=treeview]").Treeview("init");
+
+      // Also we activate the SidebarSearch Plugin
+      window.$("[data-widget=sidebar-search]").SidebarSearch("init");
+    }
 
     this.unlisten = this.props.history.listen((location) => {
       this.updateNavBar(location);
@@ -85,7 +94,7 @@ class MainSidebar extends Component {
       } else {
         link = (
           <li className="nav-item" key={fullRoute}>
-            <a role="button" className="nav-link">
+            <a className="nav-link" href="#">
               <i className={"nav-icon " + route.icon}></i>
               <p>
                 { route.name }

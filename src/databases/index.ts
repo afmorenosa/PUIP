@@ -14,8 +14,8 @@ class db {
   static Product = null;
 
   constructor() {
-    if (config.hasKey("last_file") && fs.existsSync(config.getKey("last_file"))) {
-      this.loadFile(config.getKey("last_file"));
+    if (config.hasKey("lastFile") && fs.existsSync(config.getKey("lastFile"))) {
+      this.loadFile(config.getKey("lastFile"));
       this.migrate().then(() => {
         this.loadModels();
       });

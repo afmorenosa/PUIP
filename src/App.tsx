@@ -3,9 +3,9 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import Routes from "./Routes";
 import StartUp from "./components/startup";
+import Admin from "./components/admin";
 import config from "./config";
 import fs from "fs";
-import db from "./databases";
 
 class App extends Component {
   constructor(props) {
@@ -13,85 +13,21 @@ class App extends Component {
 
     let isFirstTime = true;
 
-    if (config.hasKey("last_file") && fs.existsSync(config.getKey("last_file"))) {
+    if (config.hasKey("lastFile") && fs.existsSync(config.getKey("lastFile"))) {
       isFirstTime = false;
     }
 
     this.state = {
-      isFirstTime: isFirstTime
+      isFirstTime: isFirstTime,
+      createNewFile: false
     };
 
-    this.renderPageList = this.renderPageList.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
-  }
-
-  renderPageList() {
-    const getList = function(route, parentRoute) {
-      let link;
-      let fullRoute = parentRoute + route.route;
-
-      if(route.subroutes == undefined) {
-        return (
-          <Route
-            key={fullRoute}
-            exact path={fullRoute}>
-            {route.component}
-          </Route>
-        );
-      } else {
-        return (
-          Object.values(route.subroutes).map((route) => {
-            return getList(route, fullRoute);
-          })
-        );
-      }
-    };
-
-    return Object.values(Routes).map((route) => { return getList(route, ""); });
-  }
-
-  componentDidMount() {
-    if (this.state.isFirstTime) {
-      document.body.classList = "hold-transition login-page";
-
-      window.$("#wrapper").get(0).classList = "login-box";
-
-      window.$("body").Layout("fixLoginRegisterHeight");
-    } else {
-      document.body.classList =
-        "hold-transition sidebar-mini layout-fixed " +
-        "layout-navbar-fixed layout-footer-fixed";
-
-      window.$("#wrapper").get(0).classList = "wrapper";
-
-      window.$("body").Layout("fixLayoutHeight");
-
-      window.$("[data-widget=treeview]").Treeview("init");
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.state.isFirstTime) {
-      document.body.classList = "hold-transition login-page";
-
-      window.$("#wrapper").get(0).classList = "login-box";
-
-      window.$("body").Layout("fixLoginRegisterHeight");
-    } else {
-      document.body.classList =
-        "hold-transition sidebar-mini layout-fixed " +
-        "layout-navbar-fixed layout-footer-fixed";
-
-      window.$("#wrapper").get(0).classList = "wrapper";
-
-      window.$("body").Layout("fixLayoutHeight");
-
-      window.$("[data-widget=treeview]").Treeview("init");
-    }
   }
 
   handleLoad() {
     this.setState({
+      createNewFile: true,
       isFirstTime: false
     });
   };
@@ -99,21 +35,12 @@ class App extends Component {
   render() {
     if (this.state.isFirstTime) {
       return (
-        <StartUp handleLoad={this.handleLoad}/>
+        <StartUp handleLoad={this.handleLoad} />
       );
     }
 
     return (
-      <>
-        <HashRouter>
-          <Layout.Header />
-          <Layout.MainSidebar />
-          <Switch>
-            {this.renderPageList()}
-          </Switch>
-          <Layout.Footer />
-        </HashRouter>
-      </>
+      <Admin isFileCreate={this.state.createNewFile}/>
     );
   }
 }

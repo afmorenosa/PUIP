@@ -1,13 +1,13 @@
 import React from "react";
+import Dashboard from "./components/dashboard";
 import Product from "./components/product";
-import ContentWrapper from "./components/common/ContentWrapper";
 
 const Routes = {
   home: {
     name: "Home",
     route: "/",
     icon: "fas fa-home",
-    component: <ContentWrapper title="Home" />
+    component: <Dashboard />
   },
   product: {
     name: "Product",

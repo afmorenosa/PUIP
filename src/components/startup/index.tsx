@@ -18,6 +18,7 @@ class StartUp extends Component {
     this.state = {
       step: 0,
       business: {
+        id: 0,
         name: "",
         address: "",
         city: "",
@@ -30,6 +31,11 @@ class StartUp extends Component {
     this.handleNew = this.handleNew.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
+  }
+
+  componentDidMount() {
+    document.body.classList = "hold-transition login-page";
+    window.$("body").Layout("fixLoginRegisterHeight");
   }
 
   handleNew(step, business) {
@@ -55,7 +61,7 @@ class StartUp extends Component {
     db.migrate().then(() => {
       db.loadModels();
     }).finally(() => {
-      config.addToConfig("last_file", databasePath[0]);
+      config.addToConfig("lastFile", databasePath[0]);
       this.props.handleLoad();
     });
   }
@@ -82,7 +88,7 @@ class StartUp extends Component {
       db.bsdb.knex.insert([this.state.business]).into("business")
         .then();
     }).finally(() => {
-      config.addToConfig("last_file", databasePath);
+      config.addToConfig("lastFile", databasePath);
       this.props.handleLoad();
     });
   }
@@ -92,9 +98,11 @@ class StartUp extends Component {
   }
 
   render() {
+    let view;
+
     switch (this.state.step) {
     case 1:
-      return (
+       view = (
         <Address
           business={this.state.business}
           onContinue={this.handleNew}
@@ -102,7 +110,7 @@ class StartUp extends Component {
       );
 
     case 2:
-      return (
+      view = (
         <Contact
           business={this.state.business}
           onContinue={this.handleNew}
@@ -110,7 +118,7 @@ class StartUp extends Component {
       );
 
     case 3:
-      return (
+      view = (
         <Confirmation
           business={this.state.business}
           onReset={this.handleNew}
@@ -119,7 +127,7 @@ class StartUp extends Component {
       );
 
     default:
-      return (
+      view = (
         <Welcome
           business={this.state.business}
           onNew={this.handleNew}
@@ -127,6 +135,12 @@ class StartUp extends Component {
           onClose={this.handleClose} />
       );
     }
+
+    return (
+      <div className="login-box">
+        {view}
+      </div>
+    );
   }
 }
 
