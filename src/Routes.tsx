@@ -5,32 +5,42 @@ import Product from "./components/product";
 const Routes = {
   home: {
     name: "Home",
+    show: true,
     route: "/",
     icon: "fas fa-home",
-    component: <Dashboard />
+    component: Dashboard
   },
   product: {
     name: "Product",
+    show: true,
     route: "/product",
     icon: "fas fa-boxes",
     subroutes: {
-      new: {
-        name: "New Product",
-        route: "/create",
-        icon: "fas fa-plus",
-        component: <Product.Create />
-      },
       all: {
         name: "All Products",
+        show: true,
         route: "/all",
         icon: "fas fa-pallet",
-        component: <Product.All />
+        component: Product.All
+      },
+      new: {
+        name: "New Product",
+        show: true,
+        route: "/create",
+        icon: "fas fa-plus",
+        component: Product.Create
+      },
+      detail: {
+        name: "Product Detail",
+        show: false,
+        route: "/detail/:id",
+        component: Product.Detail
       }
     }
   }
 };
 
-function getRoute(route) {
+function getRoute(route, id = null) {
   var searcher = Routes;
   let parsedRoute = "";
   try {
@@ -45,6 +55,10 @@ function getRoute(route) {
         }, "");
   } catch (fallbackRoute) {
     parsedRoute = fallbackRoute;
+  }
+
+  if (id !== null) {
+    parsedRoute = parsedRoute.replace(":id", id);
   }
 
   return parsedRoute;

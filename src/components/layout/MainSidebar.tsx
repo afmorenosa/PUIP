@@ -76,21 +76,23 @@ class MainSidebar extends Component {
       let fullRoute = parentRoute + route.route;
 
       if(route.subroutes == undefined) {
-        link = (
-          <li className="nav-item" key={fullRoute}>
-            <Link
-              className={
-                "nav-link" +
-                  (sidebar.state.loadedPage == fullRoute ? " active" : "")
-              }
-              to={fullRoute}
-              onClick={sidebar.handleChangePage}
-              replace>
-              <i className={"nav-icon " + route.icon}></i>
-              <p>{ route.name }</p>
-            </Link>
-          </li>
-        );
+        if (route.show) {
+          link = (
+            <li className="nav-item" key={fullRoute}>
+              <Link
+                className={
+                  "nav-link" +
+                    (sidebar.state.loadedPage == fullRoute ? " active" : "")
+                }
+                to={fullRoute}
+                onClick={sidebar.handleChangePage}
+                replace>
+                <i className={"nav-icon " + route.icon}></i>
+                <p>{ route.name }</p>
+              </Link>
+            </li>
+          );
+        }
       } else {
         link = (
           <li className="nav-item" key={fullRoute}>

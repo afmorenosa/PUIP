@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   Row,
   Col,
@@ -7,6 +7,7 @@ import {
   Table,
   ButtonGroup
 } from "react-bootstrap";
+import { getRoute } from "../../Routes";
 import ContentWrapper from "../common/ContentWrapper";
 import Card from "../common/Card";
 import db from "../../databases";
@@ -44,7 +45,11 @@ class ProductAll extends Component {
           <td>{product.get("quantity")}</td>
           <td>
             <ButtonGroup>
-              <Button variant="outline-info" size="xs">Detail</Button>
+                <Link
+                  to={getRoute("product.detail", product.get("id"))}
+                  replace>
+                  <Button variant="outline-info" size="xs">Detail</Button>
+                </Link>
             </ButtonGroup>
           </td>
         </tr>

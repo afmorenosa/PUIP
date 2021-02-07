@@ -23,9 +23,8 @@ class Admin extends Component {
         return (
           <Route
             key={fullRoute}
-            exact path={fullRoute}>
-            {route.component}
-          </Route>
+            exact path={fullRoute}
+            component={route.component} />
         );
       } else {
         return (

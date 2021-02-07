@@ -1,10 +1,12 @@
 import React from "react";
-import Create from "./Create";
 import All from "./All";
+import Create from "./Create";
+import Detail from "./Detail";
 
 const Product = {
+  All: All,
   Create: Create,
-  All: All
+  Detail: Detail
 };
 
 export default Product;
